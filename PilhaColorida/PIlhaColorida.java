@@ -20,19 +20,37 @@ public class PIlhaColorida {
     }
 
     public int getCapacidade(){
-        return this.tamanho;
+        return this.capacidade;
     }
 
     public int getTopoPilhaPreta(){
-        return this.tamanho;
+        return this.topoPilhaPreta;
     }
 
     public int getTopoPilhaVermelha(){
-        return this.tamanho;
+        return this.topoPilhaVermelha;
+    }
+
+    public Object getArrayGeral(int value){
+        return this.ArrayGeral[value];
     }
 
     public void increaseCapacity(){
     //pendente
+        this.capacidade *= 2;
+        Object[] ArrayGeralAumentado = new Object[this.capacidade];
+
+        //for para inserir pilha preta
+        for (int i=topoPilhaPreta; i <= this.capacidade; i++){
+            ArrayGeralAumentado[i + (this.capacidade/2)] = ArrayGeral[i];
+        }
+
+        //for para inserir pilha vermelha
+        for(int i=topoPilhaVermelha; i >= 0; i--){
+            ArrayGeralAumentado[i] = ArrayGeral[i];
+        }
+
+        ArrayGeral = ArrayGeralAumentado;
     }
 
     public void reduct(){
