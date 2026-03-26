@@ -79,12 +79,12 @@ public class PIlhaColorida {
     }
 
     public void pushPPreta(int value){
-    //pendente
         if(tamanho==capacidade){
             increaseCapacity();
         }
         ArrayGeral[--topoPilhaPreta] = value;
         this.tamanho++;
+        
     }
 
     public void pushPVermelha(int value){
