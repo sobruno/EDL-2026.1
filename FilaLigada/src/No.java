@@ -14,7 +14,7 @@ public class No {
         return proximo;
     }
 
-    public void setProximo(Object o) {
-
+    public void setProximo(No o) {
+        proximo = o; 
     }
 }
