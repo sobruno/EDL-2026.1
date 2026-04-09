@@ -9,6 +9,13 @@ public class FilaLigada implements Fila {
 
     public int size(){
 
+        if(Inicio == null){
+            return 0;
+        }
+        if(Inicio == Fim){
+            return 1;
+        }
+
         //gema do size
         No leao = Inicio;
         int tamanho = 0;
@@ -23,6 +30,12 @@ public class FilaLigada implements Fila {
         No Prox = new No();
         Prox.setElemento(o);
 
+        if(isEmpty()){
+            this.Inicio = Prox;
+            this.Fim = Prox;
+            Prox.setElemento(o);
+        }
+
         //gema do enqueue
         Fim.setProximo(Prox);
         Prox.setProximo(null);
@@ -32,6 +45,17 @@ public class FilaLigada implements Fila {
     }
 
     public Object dequeue(){
+
+        if(isEmpty()){
+            throw new FilaVaziaExcecao("A fila está vazia");
+        }
+
+        if(Inicio == Fim){
+            Object valor = Inicio.getElemento();
+            Inicio = null;
+            Fim = null;
+            return valor;
+        }
 
         //gema do dequeue
         No leao = Inicio;
@@ -52,7 +76,11 @@ public class FilaLigada implements Fila {
     }
 
     public Object first(){
-        return Inicio;
+        if(isEmpty()){
+            throw new FilaVaziaExcecao("A fila está vazia");
+        }
+
+        return Inicio.getElemento();
     }
 
 }
