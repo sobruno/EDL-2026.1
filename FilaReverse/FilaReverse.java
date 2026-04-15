@@ -1,49 +1,89 @@
 public class FilaReverse {
     private int inicio, fim, tamanho, capacidade;
-    private int[] FilaArray;
+    private int[] fila;
+    private boolean contrario;
 
     public FilaReverse(int cap){
-        this.inicio = 0;
-        this.fim =0;
-        this.tamanho= 0;
         this.capacidade = cap;
-        this.FilaArray = new int[capacidade];
+        this.fila = new int[cap];
+        this.inicio = 0;
+        this.fim = 0;
+        this.tamanho = 0;
+        this.contrario = false;
     }
 
-    public void increaseCapacity(){
-        int capacidadeAntiga = this.capacidade;
-        this.capacidade *= 2;
-        Object[] ArrayGeralAumentado = new Object[this.capacidade];
+    private void increaseCapacity(){
+        int[] dobro = new int[capacidade * 2];
 
+        for(int i = 0; i < tamanho; i++){
+            dobro[i] = fila[(inicio + i) % capacidade];
+        }
 
-
+        fila = dobro;
+        capacidade *= 2;
+        inicio = 0;
+        fim = tamanho;
     }
 
-    public void reduct(){
+    private void reduct(){
+        if(capacidade <= 1) {
+            return;
+        }
 
+        int[] metade = new int[capacidade / 2];
+
+        for(int i = 0; i < tamanho; i++){
+            metade[i] = fila[(inicio + i) % capacidade];
+        }
+
+        fila = metade;
+        capacidade /= 2;
+        inicio = 0;
+        fim = tamanho;
     }
 
     public void reverse(){
-
+        contrario = !contrario;
     }
 
     public void enqueue(int value){
-        if(tamanho==capacidade){
+        if(tamanho == capacidade){
             increaseCapacity();
         }
-        if(fim+1 == capacidade){
-            fim=0;
+
+        if(!contrario){
+            fila[fim] = value;
+            fim = (fim + 1) % capacidade;
+        } else {
+            inicio = (inicio - 1 + capacidade) % capacidade;
+            fila[inicio] = value;
         }
 
-        FilaArray[fim] = value;
         tamanho++;
     }
 
     public int dequeue(){
-        if(fim-1 < 0){
-            fim=capacidade;
+        if(isEmpty()){
+            throw new FilaVaziaExcecao("A fila está vazia");
         }
-        return fim;
+
+        int valor;
+
+        if(!contrario){
+            valor = fila[inicio];
+            inicio = (inicio + 1) % capacidade;
+        } else {
+            fim = (fim - 1 + capacidade) % capacidade;
+            valor = fila[fim];
+        }
+
+        tamanho--;
+
+        if(tamanho <= capacidade / 3){
+            reduct();
+        }
+
+        return valor;
     }
 
     public int size(){
@@ -51,7 +91,6 @@ public class FilaReverse {
     }
 
     public boolean isEmpty(){
-        return inicio==fim;
+        return tamanho == 0;
     }
-
 }
