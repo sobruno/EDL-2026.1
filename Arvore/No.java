@@ -1,13 +1,16 @@
 package Arvore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class No {
     Object valor;
-    No Pai;
-    No Filho;
+    No pai; 
+    List<No> filhos; 
 
-    public No(Object valor){
+    public No(Object valor) {
         this.valor = valor;
-        this.Pai = null;
-        this.Filho = null;
+        this.pai = null;
+        this.filhos = new ArrayList<>(); 
     }
 }
