@@ -1,0 +1,9 @@
+# Ignorar arquivos compilados Java
+*.class
+
+# Ignorar diretórios de build ou IDE comuns
+*.jar
+*.war
+*.ear
+*.iml
+.vscode/
