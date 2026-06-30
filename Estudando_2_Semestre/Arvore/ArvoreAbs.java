@@ -1,8 +1,8 @@
-package ArvoreBinaria;
+package Arvore;
 import java.util.Iterator;
 
 
-public abstract class ArvoreBin{
+public abstract class Arvore{
     public abstract int size();
     public abstract int height(No node);
     public abstract boolean isEmpty();
@@ -26,9 +26,13 @@ public abstract class ArvoreBin{
     public abstract boolean hasLeft(No node);
     public abstract boolean hasRight(No node);
 
-    public abstract No treeSearch(No node, Object element);
+    protected abstract No treeSearch(No node, Object element);
 
     public abstract void insert(Object element);
     public abstract void remove(No node);
     public abstract No find(Object element);
+
+    public abstract int compare(Object a, Object b);
+    protected abstract void transplant(No alvo, No substituto);
+    protected No treeMaximum(No node);
 }
