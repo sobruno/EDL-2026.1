@@ -32,7 +32,6 @@ public abstract class Arvore{
     public abstract void remove(No node);
     public abstract No find(Object element);
 
-    public abstract int compare(Object a, Object b);
     protected abstract void transplant(No alvo, No substituto);
-    protected No treeMaximum(No node);
+    protected abstract No treeMaximum (No node);
 }

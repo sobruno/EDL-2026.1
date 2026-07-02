@@ -114,7 +114,17 @@ public class Arvore extends ArvoreAbs{
     }
 
     protected No treeSearch(No node, Object element) {
-        return this.raiz;
+        if(isExternal(node))
+            return node;
+
+        if(k<node.valor)
+            return treeSearch(node.filhoEsq, element);
+
+        else if(k==node.valor)
+            return node;
+
+        else
+            return treeSearch(node.filhoDir);
     }
 
     public void insert(Object element) {
@@ -124,18 +134,18 @@ public class Arvore extends ArvoreAbs{
     }
 
     public No find(Object element) {
-        return this.raiz;
-    }
-
-    private int compare(Object a, Object b) {
-        return 1;
+        return treeSearch(this.raiz, element);
     }
 
     private void transplant(No alvo, No substituto) {
     }
 
     private No treeMaximum(No node) {
-        return this.raiz;
+        No temp = node;
+        while(temp !=null && temp.filhoDir != null)
+            temp= temp.filhoDir;
+
+        return temp;
     }
 
 }
