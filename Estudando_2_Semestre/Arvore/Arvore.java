@@ -39,19 +39,39 @@ public class Arvore extends ArvoreAbs{
     }
 
     public No parent(No node) {
-        return this.raiz;
+        if(node == null)
+            return null;
+
+        return node.pai;
     }
 
     public Iterator children(No node) {
-        return 1;
+        List<No> filhos = new ArrayList<>();
+
+        if (node == null)
+            return filhos.iterator();
+
+        if(hasLeft(node))
+            filhos.add(node.filhoEsq);
+
+        if(hasRight(node))
+            filhos.add(node.filhoDir);
+        
+        return filhos.iterator();
     }
 
     public boolean isInternal(No node) {
-        return 1;
+        if(node == null)
+            return false;
+
+        return hasLeft(node) || hasRight(node);
     }
 
     public boolean isExternal(No node) {
-        return 1;
+        if(node==null)
+            return false;
+
+        return !isInternal(node);
     }
 
     public boolean isRoot(No node) {
@@ -63,23 +83,34 @@ public class Arvore extends ArvoreAbs{
     }
 
     public Object replace(No node, Object element) {
-        return 1;
+        if(node == null)
+            return null;
+
+        Object antigo = node.valor;
+        node.valor = element;
+        return antigo;
     }
 
     public No leftChild(No node) {
-        return this.raiz;
+        if(node == null)
+            return null;
+
+        return node.filhoEsq;
     }
 
     public No rightChild(No node) {
-        return this.raiz;
+        if(node == null)
+            return null;
+
+        return node.filhoDir;
     }
 
     public boolean hasLeft(No node) {
-        return 1;
+        return node != null && node.filhoEsq != null;
     }
 
     public boolean hasRight(No node) {
-        return 1;
+        return node != null && node.filhoDir != null;
     }
 
     protected No treeSearch(No node, Object element) {
